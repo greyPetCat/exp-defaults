@@ -5,7 +5,7 @@
 ## 使用方法
 
 ```javascript
-node ./exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [导出文件名(默认值：index.js)]
+exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [导出文件名(默认值：index.js)]
 ```
 
 ## 使用场景
