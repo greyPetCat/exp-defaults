@@ -92,18 +92,23 @@ const createComponent = (libsPath, componentName, componentPath, isDefault) => {
         return 0
     }
 }
-// 路径配置
-const jsFilePath = path.join(path.join(__dirname, rootDir), mainExportFileName)
-// 获取所有组件信息
-const componentsInfo = findComponents(jsFilePath)
-// 先创建组件统一导出文件夹
-const libsPath = path.join(path.join(__dirname, rootDir), targetDir)
-createFolder(libsPath)
-// 遍历组件，创建组件文件夹和导出文件
-for (const componentName in componentsInfo) {
-    if (Object.hasOwnProperty.call(componentsInfo, componentName)) {
-        const info = componentsInfo[componentName]
-        const isDefault = info.type === 'ImportDefaultSpecifier'
-        createComponent(libsPath, componentName, info.path, isDefault)
+
+const start = (rootDir, mainExportFileName, targetDir) => {
+    // 路径配置
+    const jsFilePath = path.join(path.join(__dirname, rootDir), mainExportFileName)
+    // 获取所有组件信息
+    const componentsInfo = findComponents(jsFilePath)
+    // 先创建组件统一导出文件夹
+    const libsPath = path.join(path.join(__dirname, rootDir), targetDir)
+    createFolder(libsPath)
+    // 遍历组件，创建组件文件夹和导出文件
+    for (const componentName in componentsInfo) {
+        if (Object.hasOwnProperty.call(componentsInfo, componentName)) {
+            const info = componentsInfo[componentName]
+            const isDefault = info.type === 'ImportDefaultSpecifier'
+            createComponent(libsPath, componentName, info.path, isDefault)
+        }
     }
 }
+
+start(rootDir, mainExportFileName, targetDir)
