@@ -14,6 +14,7 @@ node ./exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [
 现在 exp-defaults 工具，将自动读取指定 js 文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
 
 如有以下文件结构：
+```javascript
 project-name/
 │
 ├── src/
@@ -24,6 +25,8 @@ project-name/
 │ ├── Component3/
 │ └── ......
 └── ......
+```
+
 其中，src/index.js 中导出组件：
 
 ```javascript
@@ -39,6 +42,7 @@ node ./exp-defaults libs ./src index.js
 ```
 
 则，libs 文件夹中生成所有的导出组件文件：
+```javascript
 project-name/
 │
 ├── src/
@@ -57,6 +61,8 @@ project-name/
 │ │ └── index.js
 │ └── ......
 └── ......
+```
+
 其中，src/libs/Component1/index.js 中导出组件：
 
 ```javascript
