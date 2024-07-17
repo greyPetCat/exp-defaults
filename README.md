@@ -10,20 +10,23 @@ node ./exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [
 
 ## 使用场景
 
-经常我们会写一个组件库，在组件库中，我们通常会export {Component1, Component2, Component3...}导出所有的组件，但是当我们需要按需引入优化时，又需要将各组件以默认导出的方式剥离出来。这时要么手动重新写导出文件，要么就需要修改原来组件的导出形式。
+经常我们写一个组件库，开始考虑不周在组件库中，我们通常会export {Component1, Component2, Component3...}导出所有组件，但是当我们需要按需引入优化时，又需要将各组件以默认导出的方式剥离出来，这时要么手动重新依次写导出文件，要么就需要修改原来组件的导出形式。
 现在 exp-defaults 工具，将自动读取指定 js 文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
 
 如有以下文件结构：
+```javascript
 project-name/
 │
 ├── src/
-│ ├── index.js
-│ └── components/
-│ ├── Component1/
-│ ├── Component2/
-│ ├── Component3/
-│ └── ......
+│  ├── index.js
+│  └── components/
+│    ├── Component1/
+│    ├── Component2/
+│    ├── Component3/
+│    └── ......
 └── ......
+```
+
 其中，src/index.js 中导出组件：
 
 ```javascript
@@ -39,24 +42,27 @@ node ./exp-defaults libs ./src index.js
 ```
 
 则，libs 文件夹中生成所有的导出组件文件：
+```javascript
 project-name/
 │
 ├── src/
-│ ├── index.js
-│ └── components/
-│ ├── Component1/
-│ ├── Component2/
-│ ├── Component3/
-│ └── ......
+│  ├── index.js
+│  └── components/
+│    ├── Component1/
+│    ├── Component2/
+│    ├── Component3/
+│    └── ......
 │──── libs/
-│ ├── Component1/
-│ │ └── index.js
-│ ├── Component2/
-│ │ └── index.js
-│ ├── Component3/
-│ │ └── index.js
-│ └── ......
+│    ├── Component1/
+│    │  └── index.js
+│    ├── Component2/
+│    │  └── index.js
+│    ├── Component3/
+│    │  └── index.js
+│    └── ......
 └── ......
+```
+
 其中，src/libs/Component1/index.js 中导出组件：
 
 ```javascript
