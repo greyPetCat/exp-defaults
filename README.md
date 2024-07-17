@@ -18,12 +18,12 @@ node ./exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [
 project-name/
 │
 ├── src/
-│ ├── index.js
-│ └── components/
-│ ├── Component1/
-│ ├── Component2/
-│ ├── Component3/
-│ └── ......
+│  ├── index.js
+│  └── components/
+│    ├── Component1/
+│    ├── Component2/
+│    ├── Component3/
+│    └── ......
 └── ......
 ```
 
@@ -46,20 +46,20 @@ node ./exp-defaults libs ./src index.js
 project-name/
 │
 ├── src/
-│ ├── index.js
-│ └── components/
-│ ├── Component1/
-│ ├── Component2/
-│ ├── Component3/
-│ └── ......
+│  ├── index.js
+│  └── components/
+│    ├── Component1/
+│    ├── Component2/
+│    ├── Component3/
+│    └── ......
 │──── libs/
-│ ├── Component1/
-│ │ └── index.js
-│ ├── Component2/
-│ │ └── index.js
-│ ├── Component3/
-│ │ └── index.js
-│ └── ......
+│    ├── Component1/
+│    │  └── index.js
+│    ├── Component2/
+│    │  └── index.js
+│    ├── Component3/
+│    │  └── index.js
+│    └── ......
 └── ......
 ```
 
