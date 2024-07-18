@@ -1,10 +1,13 @@
 {
     "name": "exp-defaults",
-    "version": "1.0.001",
+    "version": "1.0.41",
     "description": "将一个js文件的所有导出统一在一个文件下使用默认导出的方式分别导出",
     "main": "index.js",
     "repository": "https://github.com/greyPetCat/exp-defaults.git",
     "author": "chinayaon@163.com",
+    "bin": {
+        "exp-defaults": "./src/index.js"
+    },
     "license": "MIT",
     "keywords": [
         "构建工具",
