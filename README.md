@@ -1,19 +1,34 @@
 ## 说明
 
-将一个js文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
+将一个 js 文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
+
+## 安装方法
+
+```javascript
+npm i exp-defaults
+```
 
 ## 使用方法
 
 ```javascript
-exp-defaults 统一导出的文件夹 [根文件夹(默认值：./src)] [导出文件名(默认值：index.js)]
+exp-defaults [targetDir] [rootDir] [mainExportFile]
 ```
+
+### 传参说明
+
+| 参数           | 说明                                         | 必填 | 默认     |
+| -------------- | -------------------------------------------- | ---- | -------- |
+| rootDir        | 根目录                                       | 否   | "./src/" |
+| targetDir      | 统一默认导出組件的目标文件夹(相对于 rootDir) | 否   | "/libs"  |
+| mainExportFile | 含导出组件信息的文件路径                     | 否   | index.js |
 
 ## 使用场景
 
-经常我们写一个组件库，开始考虑不周在组件库中，我们通常会export {Component1, Component2, Component3...}导出所有组件，但是当我们需要按需引入优化时，又需要将各组件以默认导出的方式剥离出来，这时要么手动重新依次写导出文件，要么就需要修改原来组件的导出形式。
-现在 exp-defaults 工具，将自动读取指定 js 文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
+经常我们写一个组件库，开始考虑不周在组件库中通常会 export {Component1, Component2, Component3...}导出所有组件，但是当我们需要按需引入优化、懒加载等场景时，又需要将各组件以默认导出的方式剥离出来，这时要么手动重新依次写导出文件，要么就需要修改原来组件的导出形式。
+exp-defaults 工具将自动读取指定 js 文件中所有导出组件信息，在另一个文件夹中统一使用默认导出的方式分别独立导出。
 
 如有以下文件结构：
+
 ```javascript
 project-name/
 │
@@ -38,10 +53,11 @@ export { Component1, Component2, Component3 }
 如使用本工具:
 
 ```javascript
-node ./exp-defaults libs ./src index.js
+exp-defaults libs ./src index.js
 ```
 
-则，libs 文件夹中生成所有的导出组件文件：
+则，在./src 下生成 libs 文件夹，并自动生成所有的导出组件文件：
+
 ```javascript
 project-name/
 │
@@ -86,7 +102,7 @@ export default Component3
 
 至此可以直接使用/src/libs 文件夹中的组件
 
-在构建工具中需要按需引用时，可以使用以下配置，以 rspack 为例,webpack 配置也差不多：
+在构建工具中按需引用时，可以使用以下配置，以 rspack 为例,webpack 配置也差不多：
 
 ```javascript
 
