@@ -11,7 +11,7 @@ npm i exp-defaults
 ## 使用方法
 
 ```javascript
-exp-defaults targetDir [rootDir] [(mainExportFile)]
+exp-defaults [targetDir] [rootDir] [mainExportFile]
 ```
 
 ### 传参说明
@@ -24,8 +24,8 @@ exp-defaults targetDir [rootDir] [(mainExportFile)]
 
 ## 使用场景
 
-经常我们写一个组件库，开始考虑不周在组件库中，我们通常会 export {Component1, Component2, Component3...}导出所有组件，但是当我们需要按需引入优化时，又需要将各组件以默认导出的方式剥离出来，这时要么手动重新依次写导出文件，要么就需要修改原来组件的导出形式。
-现在 exp-defaults 工具，将自动读取指定 js 文件中所有导出组件，在另一个文件夹中统一使用默认导出的方式分别独立导出。
+经常我们写一个组件库，开始考虑不周在组件库中通常会 export {Component1, Component2, Component3...}导出所有组件，但是当我们需要按需引入优化、懒加载等场景时，又需要将各组件以默认导出的方式剥离出来，这时要么手动重新依次写导出文件，要么就需要修改原来组件的导出形式。
+exp-defaults 工具将自动读取指定 js 文件中所有导出组件信息，在另一个文件夹中统一使用默认导出的方式分别独立导出。
 
 如有以下文件结构：
 

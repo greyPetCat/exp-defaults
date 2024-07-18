@@ -1,6 +1,6 @@
 {
     "name": "exp-defaults",
-    "version": "1.0.41",
+    "version": "1.0.44",
     "description": "将一个js文件的所有导出统一在一个文件下使用默认导出的方式分别导出",
     "main": "index.js",
     "repository": "https://github.com/greyPetCat/exp-defaults.git",
@@ -12,6 +12,11 @@
     "keywords": [
         "构建工具",
         "拆分组件",
+        "构建辅助",
+        "懒加载",
+        "按需加载",
+        "按需引入",
+        "命名导出转默认导出",
         "默认导出"
     ],
     "dependencies": {
