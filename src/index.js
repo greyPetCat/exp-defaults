@@ -5,6 +5,8 @@ const fs = require('fs')
 const path = require('path')
 const acorn = require('acorn')
 const walk = require('acorn-walk')
+const chalk = require('chalk')
+const package = require('../package.json')
 const WORK_DIR = process.cwd()
 // 获取命令行参数
 const [, , targetDir = '/libs', rootDir = './src/', mainExportFileName = 'index.jsx', ...restArgs] = process.argv
@@ -54,9 +56,8 @@ const findComponents = (jsFilePath) => {
 const createFileContent = (filePath, content) => {
     try {
         fs.writeFileSync(filePath, content)
-        console.log(filePath + '文件写入成功')
     } catch (error) {
-        console.error('文件写入失败:', error)
+        console.log(chalk.white.bgRed('  文件写入失败:' + filePath + '  '))
     }
 }
 // 创建文件夹
@@ -64,12 +65,12 @@ const createFolder = (folderPath) => {
     if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath, { recursive: true }, (err) => {
             if (err) {
-                console.error(`创建文件夹时出错: ${err}`)
+                console.log(chalk.white.bgRed('  创建文件夹时出错:' + folderPath + '  '))
                 return
             }
         })
     } else {
-        console.log(`文件夹已存在: ${folderPath}`)
+        // console.log(chalk.white.bgGreen(`文件夹已存在: ${folderPath}`))
     }
 }
 // 创建组件
@@ -95,27 +96,31 @@ const createComponent = (libsPath, componentName, componentPath, isDefault) => {
         return 0
     }
 }
-
-const start = (rootDir, mainExportFileName, targetDir) => {
-    // 路径配置
-    const jsFilePath = path.join(path.join(WORK_DIR, rootDir), mainExportFileName)
-    console.log('targetDir', targetDir)
-    console.log('rootDir', rootDir)
-    console.log('mainExportFileName', mainExportFileName)
-    console.log('jsFilePath', jsFilePath)
-    console.log('process', process.cwd())
-    // 获取所有组件信息
-    const componentsInfo = findComponents(jsFilePath)
-    // 先创建组件统一导出文件夹
-    const libsPath = path.join(path.join(WORK_DIR, rootDir), targetDir)
-    createFolder(libsPath)
-    // 遍历组件，创建组件文件夹和导出文件
-    for (const componentName in componentsInfo) {
-        if (Object.hasOwnProperty.call(componentsInfo, componentName)) {
-            const info = componentsInfo[componentName]
-            const isDefault = info.type === 'ImportDefaultSpecifier'
-            createComponent(libsPath, componentName, info.path, isDefault)
+const version = () => {
+    console.log(chalk.green(package.version))
+}
+const start = (rootDir, mainExportFileName, targetDir, restArgs) => {
+    if (process.argv.includes('-v') || process.argv.includes('-V') || process.argv.includes('-version')) {
+        version()
+    } else {
+        // 路径配置
+        const jsFilePath = path.join(path.join(WORK_DIR, rootDir), mainExportFileName)
+        // 获取所有组件信息
+        const componentsInfo = findComponents(jsFilePath)
+        // 先创建组件统一导出文件夹
+        const libsPath = path.join(path.join(WORK_DIR, rootDir), targetDir)
+        createFolder(libsPath)
+        console.log('目标目录:' + chalk.green(libsPath) + '  ')
+        // 遍历组件，创建组件文件夹和导出文件
+        let count = 0
+        for (const componentName in componentsInfo) {
+            if (Object.hasOwnProperty.call(componentsInfo, componentName)) {
+                const info = componentsInfo[componentName]
+                const isDefault = info.type === 'ImportDefaultSpecifier'
+                count = count + createComponent(libsPath, componentName, info.path, isDefault)
+            }
         }
+        console.log('独立生成:' + chalk.green(count + '个导出  '))
     }
 }
 
