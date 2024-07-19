@@ -1,6 +1,6 @@
 {
     "name": "exp-defaults",
-    "version": "1.0.44",
+    "version": "1.0.46",
     "description": "将一个js文件的所有导出统一在一个文件下使用默认导出的方式分别导出",
     "main": "index.js",
     "repository": "https://github.com/greyPetCat/exp-defaults.git",
@@ -21,6 +21,7 @@
     ],
     "dependencies": {
         "acorn": "^8.12.1",
-        "acorn-walk": "^8.3.3"
+        "acorn-walk": "^8.3.3",
+        "chalk": "4.1.2"
     }
 }
